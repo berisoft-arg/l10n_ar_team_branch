@@ -13,4 +13,33 @@ Funcionalidades principales:
     - Control de dualidad: el usuario que crea un traslado no puede validarlo.
 * **Mapeo de Pickings:** Configura el Tipo de Operación y Ubicaciones según la tienda del usuario y cambia el tablero (dashboard) automáticamente según el destino.
 * **Reportes:** Impresión de la dirección física de la tienda (Partner de la sucursal) en Pedidos de Venta.
-  
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CONFIGURACION:
+
+1. Usuarios y Base
+Crear Usuarios: Cargá el personal de cada sucursal en el sistema.
+
+Crear Almacenes: Definí los depósitos físicos de cada tienda (ej. San Francisco, San Martín).
+
+Crear Diarios: Configurá los diarios de venta con sus respectivos puntos de venta (PdV) de AFIP.
+
+2. Equipos de Venta
+Definir la "Store": En el Equipo de Venta, asigná a los usuarios correspondientes.
+
+Vínculo Fiscal: Asigná el Partner del PDV en el equipo. Esto es lo que usará el reporte de Sale Order para imprimir la dirección de la sucursal.
+
+3. Mapeo de Recursos
+Asignar Equipos en Almacenes: En la configuración del almacén, vinculá el equipo de venta autorizado. Si se deja vacío, el almacén será Global.
+
+Asignar Equipos en Diarios: Vinculá el diario con su equipo.
+
+🚀 Funcionalidades Clave
+Mapeo Automático: Al crear un presupuesto, el almacén se selecciona solo según el equipo del usuario.
+
+Seguridad en Transferencias: Restringe la validación de movimientos de stock: solo el personal del destino puede dar el "OK" final.
+
+Control de Dualidad: El usuario que genera un movimiento de inventario no puede validarlo, forzando un control cruzado básico.
+
+Filtro Visual de Diarios: En la interfaz de facturación, los usuarios solo ven los diarios que pertenecen a su equipo (o los globales), evitando errores de carga.
