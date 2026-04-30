@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_order_form_inherit_branch" model="ir.ui.view">
-        <field name="name">sale.order.form.inherit.l10n.ar.team.branch</field>
+    <record id="view_order_form_inherit_store" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.l10n.ar.team.store</field>
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
+            <!-- Restringimos el almacén para que no puedan crear ni editar la config del local -->
             <xpath expr="//field[@name='warehouse_id']" position="attributes">
                 <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                <attribute name="required">1</attribute>
             </xpath>
 
+            <!-- Lo mismo para el diario, evitando que toquen la config del punto de venta -->
             <xpath expr="//field[@name='journal_id']" position="attributes">
                 <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
             </xpath>

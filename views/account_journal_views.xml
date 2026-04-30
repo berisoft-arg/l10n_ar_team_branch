@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_account_journal_form_inherit_branch" model="ir.ui.view">
-        <field name="name">account.journal.form.inherit.l10n.ar.team.branch</field>
+    <record id="view_account_journal_form_inherit_store" model="ir.ui.view">
+        <field name="name">account.journal.form.inherit.l10n.ar.team.store</field>
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form"/>
         <field name="arch" type="xml">
+            <!-- Ubicamos el campo en la pestaña de Configuración Avanzada o debajo del tipo -->
             <xpath expr="//field[@name='type']" position="after">
-                <field name="authorized_team_ids" 
-                    widget="many2many_tags" 
-                    options="{'no_create': True}"/>
+                <field name="store_team_ids" 
+                       widget="many2many_tags" 
+                       options="{'no_create': True, 'no_edit': True}"
+                       placeholder="Global (Todos los equipos)"/>
             </xpath>
         </field>
     </record>
