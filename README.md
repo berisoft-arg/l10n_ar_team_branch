@@ -19,18 +19,14 @@ Funcionalidades principales:
 CONFIGURACION:
 
 1. Usuarios y Base:
-    Crear Usuarios: Cargá el personal de cada sucursal en el sistema.
-
-    Crear Almacenes: Definí los depósitos físicos de cada tienda (ej. San Francisco, San Martín).
-
-    Crear Diarios: Configurá los diarios de venta con sus respectivos puntos de venta (PdV) de AFIP.
+    - Crear Usuarios: Cargá el personal de cada sucursal en el sistema.
+    - Crear Almacenes: Definí los depósitos físicos de cada tienda (ej. San Francisco, San Martín).
+    - Crear Diarios: Configurá los diarios de venta con sus respectivos puntos de venta (PdV) de ARCA.
 
 2. Equipos de Venta:
-    Definir las "Sucursales": En el Equipo de Venta, asigná a los usuarios correspondientes.
-
-    Vínculo Fiscal: Asigná el Partner del PDV en el equipo. Esto es lo que usará el reporte de Sale Order para imprimir la dirección de la sucursal.
+    - Definir las "Sucursales": En el Equipo de Venta, asigná a los usuarios correspondientes.
+    - Vínculo Fiscal: Asigná el Partner del PDV en el equipo. Esto es lo que usará el reporte de Sale Order para imprimir la dirección de la sucursal.
 
 3. Mapeo de Recursos:
-    Asignar Equipos en Almacenes: En la configuración del almacén, vinculá el equipo de venta autorizado. Si se deja vacío, el almacén será Global.
-
-    Asignar Equipos en Diarios: Vinculá el diario con su equipo, los usuarios solo verán los diarios que pertenecen a su equipo (o los globales).
+    - Asignar Equipos en Almacenes: En la configuración del almacén, vinculá el equipo de venta autorizado. Si se deja vacío, el almacén será Global.
+    - Asignar Equipos en Diarios: Vinculá los diarios con su equipo.
