@@ -1,6 +1,6 @@
 {
     'name': 'Gestion de Sucursales Localización Argentina',
-    'version': '17.0.1.2.0',
+    'version': '19.0.0.0.0',
     'category': 'Localization/Argentina',
     'author': 'Ariel Ameghino/Berisoft',
     'summary': 'Gestión de Sucursales basada en Equipos de Venta para Ventas, Facturación e Inventario.',

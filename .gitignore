@@ -1,0 +1,10 @@
+# Python cache directories
+__pycache__/
+**/__pycache__/**
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# VS Code
+.vscode/
