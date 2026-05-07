@@ -8,7 +8,7 @@
             <xpath expr="//field[@name='code']" position="after">
                 <field name="store_team_ids" 
                        widget="many2many_tags" 
-                       options="{'no_create': True}"
+                       options="{'no_create': true}"
                        placeholder="Global (Todos los equipos)"/>
             </xpath>
         </field>

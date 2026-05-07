@@ -5,15 +5,13 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
-            <!-- Restringimos el almacén para que no puedan crear ni editar la config del local -->
             <xpath expr="//field[@name='warehouse_id']" position="attributes">
-                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                <attribute name="options">{"no_create": true, "no_open": true}</attribute>
                 <attribute name="required">1</attribute>
             </xpath>
 
-            <!-- Lo mismo para el diario, evitando que toquen la config del punto de venta -->
             <xpath expr="//field[@name='journal_id']" position="attributes">
-                <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+                <attribute name="options">{"no_create": true, "no_open": true}</attribute>
             </xpath>
         </field>
     </record>
