@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='company_id']" position="after">
                 <field name="store_partner_id" 
-                       options="{'no_create': True, 'no_open': True}"
+                       options="{'no_create': true, 'no_open': true}"
                        context="{'res_partner_search_mode': 'customer'}"/>
             </xpath>
         </field>
