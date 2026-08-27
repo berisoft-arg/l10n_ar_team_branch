@@ -29,10 +29,12 @@ Funcionalidades principales:
         'l10n_ar'
     ],
     'data': [
-        'security/ir_rule.xml', 
+        'security/ir_rule.xml',
+        'security/ir.model.access.csv', 
         'views/account_journal_views.xml',
         'views/stock_warehouse_views.xml',
         'views/sale_order_views.xml',
+        'views/stock_picking_correction_wizard_views.xml',
         'views/stock_picking_views.xml',
         'views/crm_team_views.xml',
         'report/sale_report_templates.xml',

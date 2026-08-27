@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- 1. Vista Formulario del Wizard -->
+    <record id="view_stock_picking_correction_wizard_form" model="ir.ui.view">
+        <field name="name">stock.picking.correction.wizard.form</field>
+        <field name="model">stock.picking.correction.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Reversión de Saldo en Tránsito">
+                <sheet>
+                    <div class="alert alert-info" role="alert" style="margin-bottom: 15px;">
+                        <h4 class="alert-heading" style="font-weight: bold; margin-bottom: 8px;">Reversión de Faltantes a Origen</h4>
+                        <p style="margin-bottom: 5px;">Este asistente permite regularizar las unidades que no ingresaron a la sucursal de destino:</p>
+                        <ul style="margin-bottom: 5px; padding-left: 20px;">
+                            <li><strong>Retorno a Origen:</strong> Retira del stock de <em>Tránsito</em> las unidades no recibidas y las devuelve al stock disponible del <em>Almacén Origen</em>.</li>
+                            <li><strong>Cancelación de Backorders:</strong> Cancela automáticamente cualquier remito pendiente de recepción derivado de esta diferencia.</li>
+                        </ul>
+                        <p style="margin-top: 8px; margin-bottom: 0px;"><em>Nota: Si la mercadería se perdió o rompió en el trayecto, el descarte debe procesarse posteriormente mediante una orden de Scrap en el almacén origen.</em></p>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="picking_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="reason" placeholder="Describa el motivo de la reversión (ej.: Mercadería no enviada físicamente desde el depósito central)..."/>
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Detalle de Productos a Revertir">
+                            <field name="line_ids">
+                                <tree create="false" delete="false" editable="bottom">
+                                    <field name="product_id" readonly="1" force_save="1"/>
+                                    <field name="qty_demand"/>
+                                    <field name="qty_done"/>
+                                    <field name="qty_diff" string="Cant. a Revertir a Origen"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <footer>
+                    <button string="Revertir Saldo a Origen" name="action_apply_correction" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancelar" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- 2. Acción Ventana que Abre el Wizard -->
+    <record id="action_stock_picking_correction_wizard" model="ir.actions.act_window">
+        <field name="name">Reversión de Faltante a Origen</field>
+        <field name="res_model">stock.picking.correction.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

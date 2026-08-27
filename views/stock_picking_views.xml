@@ -6,17 +6,88 @@
         <field name="inherit_id" ref="stock.view_picking_form"/>
         <field name="arch" type="xml">
             
-            <!-- Usamos el índice [2] porque es el que engancha el campo visible -->
-            <xpath expr="//field[@name='location_id'][2]" position="attributes">
-                <attribute name="domain">[('usage','=','internal'),'|',('company_id','=',company_id),('company_id','=',False)]</attribute>
+            <xpath expr="//field[@name='picking_type_id']" position="attributes">
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
                 <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='location_id'][2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='location_id'][2]" position="before">
+                <!-- Usuario normal: solo lectura, fijado por default_get según su equipo de venta -->
+                <field name="src_warehouse_id"
+                       string="Almacén de Origen"
+                       readonly="1"
+                       force_save="1"
+                       options="{'no_open': True}"
+                       groups="!stock.group_stock_manager"/>
+
+                <!-- Inventory Administrator: editable, elige entre todos los almacenes de origen -->
+                <field name="src_warehouse_id"
+                       string="Almacén de Origen"
+                       readonly="state != 'draft'"
+                       force_save="1"
+                       options="{'no_open': True, 'no_create': True}"
+                       groups="stock.group_stock_manager"/>
             </xpath>
 
             <xpath expr="//field[@name='location_dest_id'][2]" position="attributes">
-                <attribute name="domain">[('usage','=','internal'),'|',('company_id','=',company_id),('company_id','=',False)]</attribute>
+                <attribute name="string">Ubicación de Destino</attribute>
+                <attribute name="readonly">1</attribute>
+                <attribute name="force_save">1</attribute>
                 <attribute name="options">{'no_create': True, 'no_open': True}</attribute>
             </xpath>
 
+            <xpath expr="//field[@name='location_dest_id'][2]" position="after">
+                <field name="location_dest_id_usage" invisible="1"/>
+                <field name="allowed_warehouse_ids" invisible="1"/>
+                <field name="dest_warehouse_id" 
+                       string="Almacén de Destino"
+                       domain="[('id', 'in', allowed_warehouse_ids)]"
+                       options="{'no_create': True, 'no_open': True}"
+                       invisible="location_dest_id_usage != 'transit'"
+                       required="location_dest_id_usage == 'transit'"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search_inherit_team_store" model="ir.ui.view">
+        <field name="name">stock.picking.internal.search.inherit.team.store</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="before">
+                <filter string="En Viaje" 
+                        name="in_transit_to_my_team" 
+                        domain="[
+                            ('state', 'in', ('assigned', 'waiting', 'confirmed')),
+                            ('location_id.usage', '=', 'transit')
+                        ]"/>
+                <separator/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Herencia de la vista Form (Botón de la cabecera) -->
+    <!-- Cambiamos el id de la vista para forzar a Odoo a recrearla -->
+    <record id="view_picking_form_inherit_correction_button_v2" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.correction.button.v2</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_open_correction_wizard" 
+                        string="Corregir Cantidades" 
+                        type="object" 
+                        class="oe_highlight" 
+                        groups="stock.group_stock_manager" 
+                        invisible="state != 'done'"/>
+            </xpath>
         </field>
     </record>
 </odoo>
